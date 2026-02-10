@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Project now needs a simple password-based admin access flow so the user can log in and manage a food menu (items with image and price).",
+  "architectural_notes": [
+    "User requested replacing/adding to Internet Identity auth with a simple shared admin password login for admin panel access."
+  ],
+  "known_issues": [
+    "Admin panel currently prompts for an 'admin token' and the user cannot access admin functions."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-implement-a-simple-password-based-admin-unlock-so-the-user-can-access-the-admin-dashboard-and-manage-menu-items-including-image-upload-and-price-using-the-password-admin-9828",
+      "title": "Implement a simple password-based admin unlock so the user can access the admin dashboard and manage menu items (including image upload and price) using the password \"admin 9828\".",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-admin-access-screen-copy-to-use-clear-english-and-reflect-password-based-access-replace-admin-token-wording-with-admin-password-and-ensure-the-call-to-action-explains-that-the-password-is-required-to-access-the-admin-dashboard",
+      "title": "Update the admin access screen copy to use clear English and reflect password-based access: replace \"Admin Token\" wording with \"Admin Password\" and ensure the call-to-action explains that the password is required to access the admin dashboard.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-password-entry-flow-integrates-with-the-existing-session-based-secret-storage-so-that-after-password-submission-the-actor-is-re-initialized-and-admin-status-is-rechecked-automatically-without-requiring-the-user-to-edit-the-url-manually",
+      "title": "Ensure the password entry flow integrates with the existing session-based secret storage so that after password submission the actor is re-initialized and admin status is rechecked automatically without requiring the user to edit the URL manually.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Add simple password-based admin login (instead of/alongside Internet Identity) to access admin panel",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Admin panel feature to manage menu items including food item image upload and price fields",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Add simple password-based admin access to unblock menu management",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

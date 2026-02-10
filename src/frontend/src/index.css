@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.75rem;
+        /* Warm café palette - espresso, cream, terracotta */
+        --background: 0.98 0.01 40;
+        --foreground: 0.25 0.02 30;
+        --card: 1 0 0;
+        --card-foreground: 0.25 0.02 30;
+        --popover: 1 0 0;
+        --popover-foreground: 0.25 0.02 30;
+        --primary: 0.45 0.08 35;
+        --primary-foreground: 0.98 0.01 40;
+        --secondary: 0.92 0.02 45;
+        --secondary-foreground: 0.35 0.03 30;
+        --muted: 0.95 0.01 40;
+        --muted-foreground: 0.55 0.02 35;
+        --accent: 0.65 0.12 25;
+        --accent-foreground: 0.98 0.01 40;
+        --destructive: 0.55 0.22 15;
+        --destructive-foreground: 0.98 0.01 40;
+        --border: 0.90 0.01 40;
+        --input: 0.90 0.01 40;
+        --ring: 0.45 0.08 35;
+        --chart-1: 0.65 0.12 25;
+        --chart-2: 0.55 0.10 45;
+        --chart-3: 0.45 0.08 35;
+        --chart-4: 0.75 0.08 50;
+        --chart-5: 0.60 0.10 20;
+    }
+
+    .dark {
+        --background: 0.20 0.02 30;
+        --foreground: 0.95 0.01 40;
+        --card: 0.25 0.02 30;
+        --card-foreground: 0.95 0.01 40;
+        --popover: 0.22 0.02 30;
+        --popover-foreground: 0.95 0.01 40;
+        --primary: 0.75 0.08 40;
+        --primary-foreground: 0.20 0.02 30;
+        --secondary: 0.30 0.02 35;
+        --secondary-foreground: 0.95 0.01 40;
+        --muted: 0.30 0.02 35;
+        --muted-foreground: 0.65 0.02 40;
+        --accent: 0.65 0.12 25;
+        --accent-foreground: 0.95 0.01 40;
+        --destructive: 0.60 0.20 15;
+        --destructive-foreground: 0.95 0.01 40;
+        --border: 0.35 0.02 30;
+        --input: 0.35 0.02 30;
+        --ring: 0.65 0.08 40;
+        --chart-1: 0.65 0.12 25;
+        --chart-2: 0.55 0.10 45;
+        --chart-3: 0.75 0.08 40;
+        --chart-4: 0.75 0.08 50;
+        --chart-5: 0.60 0.10 20;
+    }
+
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+}
+
+@layer utilities {
+    .shadow-soft {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .shadow-soft-lg {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+}

@@ -1,0 +1,66 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-a-simple-password-based-admin-unlock-so-the-user-can-access-the-admin-dashboard-and-manage-menu-items-including-image-upload-and-price-using-the-password-admin-9828",
+      "featureTitle": "Implement a simple password-based admin unlock so the user can access the admin dashboard and manage menu items (including image upload and price) using the password \"admin 9828\".",
+      "files": [
+        "frontend/src/components/auth/AdminRouteGuard.tsx",
+        "frontend/src/utils/urlParams.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-admin-access-screen-copy-to-use-clear-english-and-reflect-password-based-access-replace-admin-token-wording-with-admin-password-and-ensure-the-call-to-action-explains-that-the-password-is-required-to-access-the-admin-dashboard",
+      "featureTitle": "Update the admin access screen copy to use clear English and reflect password-based access: replace \"Admin Token\" wording with \"Admin Password\" and ensure the call-to-action explains that the password is required to access the admin dashboard.",
+      "files": [
+        "frontend/src/components/auth/AdminRouteGuard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-the-password-entry-flow-integrates-with-the-existing-session-based-secret-storage-so-that-after-password-submission-the-actor-is-re-initialized-and-admin-status-is-rechecked-automatically-without-requiring-the-user-to-edit-the-url-manually",
+      "featureTitle": "Ensure the password entry flow integrates with the existing session-based secret storage so that after password submission the actor is re-initialized and admin status is rechecked automatically without requiring the user to edit the URL manually.",
+      "files": [
+        "frontend/src/components/auth/AdminRouteGuard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

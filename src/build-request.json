@@ -1,0 +1,86 @@
+{
+  "kind": "build_request",
+  "title": "Add simple password-based admin access to unblock menu management",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement a simple password-based admin unlock so the user can access the admin dashboard and manage menu items (including image upload and price) using the password \"admin 9828\".",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Tum simple sa system kar do ki password add kar do jis se me mera menu abb kar saku food item image or price...\nPassword - admin 9828"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When a user visits /admin and is not yet authorized, the UI provides an input for an admin password (not \"token\")",
+        "Entering the exact password \"admin 9828\" and submitting results in the user becoming authorized as an admin for the current session and gaining access to the admin dashboard routes",
+        "After successful password submission, the admin check succeeds (no more \"Access Denied\" / \"Admin token required\" blocking state)",
+        "If the password is incorrect, the UI shows a clear error message and admin access is not granted",
+        "Admin authorization remains enforced for all admin-only backend methods (category/item CRUD, reordering, analytics)"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Update the admin access screen copy to use clear English and reflect password-based access: replace \"Admin Token\" wording with \"Admin Password\" and ensure the call-to-action explains that the password is required to access the admin dashboard.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Password - admin 9828"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On the /admin guard screen, labels/placeholder/button text use \"Admin Password\" / \"Enter admin password\" / \"Submit Password\" (or equivalent) instead of \"Admin Token\"",
+        "Any error/help text displayed to the user is in English"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Ensure the password entry flow integrates with the existing session-based secret storage so that after password submission the actor is re-initialized and admin status is rechecked automatically without requiring the user to edit the URL manually.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Tum simple sa system kar do ki password add kar do..."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Submitting the admin password stores it in session storage under the existing secret key used for admin initialization (\"caffeineAdminToken\")",
+        "After submission, the frontend refreshes/recreates the backend actor and re-runs the admin check automatically",
+        "A page refresh during the same browser session keeps the admin access working (until the session ends/clears)"
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor (all logic in backend/main.mo).",
+    "Do not edit files under frontend/src/components/ui or other immutable paths listed in SYSTEM_CONTEXT.",
+    "Do not add third-party authentication providers; keep Internet Identity as-is and add password as a simple admin unlock mechanism on top of the existing flow."
+  ],
+  "nonGoals": [
+    "Building a full user management system for multiple admins.",
+    "Adding password reset, email/SMS verification, or persistent credential storage beyond what is required for the simple admin unlock.",
+    "Replacing or removing Internet Identity authentication entirely."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

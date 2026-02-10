@@ -1,0 +1,71 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Password-based admin unlock for existing admin dashboard",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Add a simple admin password unlock on /admin using the exact password \"admin 9828\" to enable access to existing admin dashboard and menu management routes.",
+      "acceptanceCriteria": [
+        "When a user visits /admin and is not yet authorized, the UI provides an input for an admin password (not \"token\")",
+        "Entering the exact password \"admin 9828\" and submitting results in the user becoming authorized as an admin for the current session and gaining access to the admin dashboard routes",
+        "After successful password submission, the admin check succeeds (no more \"Access Denied\" / \"Admin token required\" blocking state)",
+        "If the password is incorrect, the UI shows a clear error message and admin access is not granted",
+        "Admin authorization remains enforced for all admin-only backend methods (category/item CRUD, reordering, analytics)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/auth/AdminRouteGuard.tsx",
+          "operation": "modify",
+          "description": "Update the /admin guard to accept an Admin Password and validate it client-side against the exact string \"admin 9828\"; on success, store it under the existing secret key (caffeineAdminToken), trigger actor recreation, and automatically re-check admin status to unlock the nested admin routes. On failure, show a clear English error message and do not persist the secret. Use the selected authorization component’s admin-check flow (isCallerAdmin + guarded admin routes) as the enforcement mechanism; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/utils/urlParams.ts",
+          "operation": "modify",
+          "description": "Add/align a setSecretParameter helper (used by AdminRouteGuard) that persists the provided secret into sessionStorage under the given key (caffeineAdminToken) without requiring URL edits, keeping the existing getSecretParameter behavior intact."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Replace \"Admin Token\" wording with clear English password-based copy on the /admin access screen.",
+      "acceptanceCriteria": [
+        "On the /admin guard screen, labels/placeholder/button text use \"Admin Password\" / \"Enter admin password\" / \"Submit Password\" (or equivalent) instead of \"Admin Token\"",
+        "Any error/help text displayed to the user is in English"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/auth/AdminRouteGuard.tsx",
+          "operation": "modify",
+          "description": "Revise the unauthorized/admin-denied UI copy to consistently say “Admin Password” (labels, placeholders, CTA button) and ensure all help/error text is clear English; keep the principal display/copy section optional but ensure any visible text remains English."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Integrate password submission with existing session-based secret storage so the actor is recreated and admin status is rechecked automatically after submit and across refresh within the same session.",
+      "acceptanceCriteria": [
+        "Submitting the admin password stores it in session storage under the existing secret key used for admin initialization (\"caffeineAdminToken\")",
+        "After submission, the frontend refreshes/recreates the backend actor and re-runs the admin check automatically",
+        "A page refresh during the same browser session keeps the admin access working (until the session ends/clears)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useActorWithRefresh.ts",
+          "operation": "modify",
+          "description": "Enhance the actor refresh helper so AdminRouteGuard can reliably trigger actor recreation and then re-run dependent admin checks (e.g., provide an async refresh that invalidates and refetches the actor query), ensuring the post-password flow works without manual navigation."
+        },
+        {
+          "path": "frontend/src/components/auth/AdminRouteGuard.tsx",
+          "operation": "modify",
+          "description": "After storing the admin password under caffeineAdminToken, call the improved actor refresh mechanism and then automatically re-run the admin check (useIsCallerAdmin refetch) without requiring URL edits; keep behavior compatible with the authorization component’s admin gating. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useActor.ts",
+          "operation": "modify",
+          "description": "Confirm and, if needed, adjust the actor initialization path to continue reading the persisted secret from session storage via getSecretParameter('caffeineAdminToken') so refreshes within the same browser session preserve admin access."
+        }
+      ]
+    }
+  ]
+}
